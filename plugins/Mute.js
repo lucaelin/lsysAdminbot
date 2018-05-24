@@ -28,7 +28,7 @@ module.exports = class Mute {
     let done = false;
     let msg = '';
 
-    if(res.sum > MUTE_REQUIRE) {
+    if(res.sum >= MUTE_REQUIRE) {
       done = true;
       let extras = {until_date: Math.round(new Date()/1000 + MUTE_TIMEOUT*60), can_send_messages: false};
       await this.tg.restrictChatMember(chat.id, user.id, extras).then(()=>{
