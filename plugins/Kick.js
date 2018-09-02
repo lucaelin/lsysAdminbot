@@ -32,7 +32,8 @@ class KickVote extends Vote {
         let extras = {until_date: Math.round(new Date()/1000 + KICK_TIMEOUT*60)};
         await this.tg.kickChatMember(this.chat.id, this.user.id, extras).then(()=>{
           msg += `I've kicked the user in question.`;
-        }).catch(()=>{
+        }).catch((e)=>{
+          console.error(e);
           msg += `I am sorry, but something went wrong...`;
         });
       } else {

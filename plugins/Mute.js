@@ -33,7 +33,8 @@ module.exports = class Mute {
       let extras = {until_date: Math.round(new Date()/1000 + MUTE_TIMEOUT*60), can_send_messages: false};
       await this.tg.restrictChatMember(chat.id, user.id, extras).then(()=>{
         msg += `I've muted the user in question.`;
-      }).catch(()=>{
+      }).catch((e)=>{
+        console.error(e);
         msg += `I am sorry, but something went wrong...`;
       });
     } else {

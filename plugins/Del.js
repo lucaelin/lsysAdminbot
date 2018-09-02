@@ -25,7 +25,8 @@ module.exports = class Del {
       done = true;
       await this.tg.deleteMessage(del.chat.id, del.message_id).then(()=>{
         msg += `I've deleted the message in question.`;
-      }).catch(()=>{
+      }).catch((e)=>{
+        console.error(e);
         msg += `I am sorry, but something went wrong...`;
       });
     } else {
@@ -51,4 +52,4 @@ module.exports = class Del {
       msg
     );
   }
-}
+};
