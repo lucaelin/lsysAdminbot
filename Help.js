@@ -1,5 +1,15 @@
 const TGExtra = require('telegraf').Extra;
 
+/*
+ * This module provides a unified way to display help messages and settings when a users issues the help command.
+ * Moules can register help- and setting- callbacks that return the text to display to the user
+ * These callbacks can return different results depending on the context where the help message was issued
+ * usage: bot.helpQueue(helptextCallback, settingsCallback)
+ * example: bot.helpQueue(
+ *   ()=>'Enter /getCount to see the current count',
+ *   (ctx)=>'The config says that the count is limited to '+someconfig[ctx.chat.id].maxCount
+ * );
+ */
 module.exports = class Help {
   constructor(bot) {
     bot.helpQueue = (...args) => this.helpQueue(...args);
@@ -18,4 +28,4 @@ module.exports = class Help {
     msg += (await Promise.all(this.settingCbs.map(async (cb)=>await cb(ctx)))).join('\n');
     ctx.reply(msg, TGExtra.markdown());
   }
-}
+};

@@ -1,12 +1,12 @@
 const DEL_REQUIRE = 3;
 
-const Vote = require("./Vote.js");
+const Vote = require('./Vote.js');
 
 module.exports = class Del {
   constructor(bot) {
     this.bot = bot;
     this.tg = bot.telegram;
-    this.bot.command('delete',(ctx)=>this.req(ctx));
+    this.bot.command('delete', (ctx)=>this.req(ctx));
     this.bot.helpQueue(this.help, this.settings);
 
     this.votes = {};
@@ -21,10 +21,10 @@ module.exports = class Del {
     let done = false;
     let msg = '';
 
-    if(res.sum >= DEL_REQUIRE) {
+    if (res.sum >= DEL_REQUIRE) {
       done = true;
       await this.tg.deleteMessage(del.chat.id, del.message_id).then(()=>{
-        msg += `I've deleted the message in question.`
+        msg += `I've deleted the message in question.`;
       }).catch(()=>{
         msg += `I am sorry, but something went wrong...`;
       });
@@ -35,9 +35,9 @@ module.exports = class Del {
     return {done, msg};
   }
   async req(ctx) {
-    console.log("del request",ctx, ctx.update.message);
-    if(!ctx.update.message.reply_to_message) {
-      return ctx.reply("Reply to a message i should votedelete")
+    console.log('del request', ctx, ctx.update.message);
+    if (!ctx.update.message.reply_to_message) {
+      return ctx.reply('Reply to a message i should votedelete');
     }
     let msg = ctx.update.message.reply_to_message;
     let txt = `Should I delete the message?`;
