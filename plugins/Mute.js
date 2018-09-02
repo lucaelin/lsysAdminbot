@@ -1,4 +1,4 @@
-const MUTE_REQUIRE = 4;
+const MUTE_REQUIRE = 6;
 const MUTE_TIMEOUT = 12*60;
 
 const Vote = require("./Vote.js");
