@@ -3,6 +3,7 @@ module.exports.loadAll = function loadAll(...args) {
     './Del.js',
     './Mute.js',
     './Kick.js',
+    './AI.js',
   ];
   return includes.map((path)=>{
     let Plugin = require(path);
