@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "lowdb": "^1.0.0",
     "remove": "^0.1.5",
     "telegraf": "^3.21.1",
     "telegram-mtproto": "^2.2.8",
