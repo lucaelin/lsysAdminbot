@@ -1,30 +1,29 @@
 const UNMUTE_REQUIRE = 8;
 
 const Vote = require('./Vote.js');
-
-
-
+ 
+ 
+ 
 moudle.exports = class Unmute {
   constructor(bot, resolver) {
-   this.bot = bot;
-   this.tg = bot.telegram;
-   this.resolver = resolver;
-   this.bot.command('unmute', (ctx)=>this.req(ctx));
-   this.bot.helpQueue(this.help, this.settings);
+    this.bot = bot;
+    this.tg = bot.telegram;
+    this.resolver = resolver;
+    this.bot.command('unmute', (ctx)=>this.req(ctx));
+    this.bot.helpQueue(this.help, this.settings);
 
-   this.votes = {};
-}
+    this.votes = {};
+  }
 	
   help(ctx) {
-   return `/unmute @username - start a vote to unmute @username`;
+    return `/unmute @username - start a vote to unmute @username`;
   }
 	
   settings(ctx) {
-   let set = [
-     `Require ${UNMUTE_REQUIRE} confirmations to unmute a user.`,
-
-   ];
-   return set.join('\n');
+    let set = [
+      `Require ${UNMUTE_REQUIRE} confirmations to unmute a user.`,
+    ];
+    return set.join('\n');
   }
 	
   async processVotes(res, chat, user) {
