@@ -2,6 +2,7 @@ module.exports.loadAll = function loadAll(...args) {
   let includes = [
     './Del.js',
     './Mute.js',
+    './Unmute.js',
     './Kick.js',
     './AI.js',
     './Update.js',

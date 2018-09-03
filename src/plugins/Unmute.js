@@ -1,10 +1,8 @@
 const UNMUTE_REQUIRE = 8;
 
 const Vote = require('./Vote.js');
- 
- 
- 
-moudle.exports = class Unmute {
+
+module.exports = class Unmute {
   constructor(bot, resolver) {
     this.bot = bot;
     this.tg = bot.telegram;
@@ -14,26 +12,26 @@ moudle.exports = class Unmute {
 
     this.votes = {};
   }
-	
+
   help(ctx) {
     return `/unmute @username - start a vote to unmute @username`;
   }
-	
+
   settings(ctx) {
     let set = [
       `Require ${UNMUTE_REQUIRE} confirmations to unmute a user.`,
     ];
     return set.join('\n');
   }
-	
+
   async processVotes(res, chat, user) {
     let done = false;
     let msg = '';
-		
+
     if (res.sum >= UNMUTE_REQUIRE) {
       done = true;
-      let extras = {can_send_messages: true, can_send_media_messages: true, can_send_other_messages: true, can_send_web_page_previews: true};
-      await this.tg.restrictChatMember(chat.id, user.id extras).then(()=>{
+      let extras = {can_send_messages: true, can_send_media_messages: true, can_send_other_messages: true, can_send_web_page_previews: true, };
+      await this.tg.restrictChatMember(chat.id, user.id, extras).then(()=>{
         msg += `I've unmuted the user in question.`;
       }).catch((e)=>{
         console.error(e);
@@ -42,9 +40,9 @@ moudle.exports = class Unmute {
     } else {
       msg += `I am currently missing another ${UNMUTE_REQUIRE - res.sum} confirmations.`;
     }
-    return {done, msg};
+    return {done, msg, };
   }
-	
+
   async req(ctx) {
     let msg = ctx.update.message;
     console.log('unmute request', msg);
@@ -53,18 +51,15 @@ moudle.exports = class Unmute {
     }
     let user = msg.entities[1].user;
     let txt = `Should I unmute [${user.first_name}](tg:/user?id=${user.id})?`;
-		
+
     let vote = new Vote(
       this.bot,
       msg.chat.id,
       txt,
-      ['Confirm'],
+      ['Confirm', ],
       (...args)=>this.processVotes(...args),
       msg.chat,
       user
     );
   }
 };
-
-	
-	
