@@ -21,7 +21,7 @@ module.exports = class AI {
         return;
       }
 
-      ctx.reply(`Update complete\n${stdout}`);
+      ctx.replyWithMarkdown(`Update complete\n\`\`\`${stdout}\`\`\``);
       ctx.reply(`Shutting down now...`);
       this.bot.stop(()=>setTimeout(process.exit));
     });
