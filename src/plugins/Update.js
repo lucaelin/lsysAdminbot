@@ -14,9 +14,9 @@ module.exports = class AI {
     this.pending = true;
     ctx.reply(`Updating now...`);
 
-    exec('git pull && npm i', (err, stdout, stderr) => {
+    exec('git pull && npm i && npm test', (err, stdout, stderr) => {
       if (err) {
-        ctx.reply(`Update failed\n${err}`);
+        ctx.replyWithMarkdown(`Update failed\n\`\`\`${err}\`\`\`\nOutputlog: \`\`\`${stdout}\`\`\`\nErrorlog: \`\`\`${stderr}\`\`\``);
         this.pending = false;
         return;
       }
