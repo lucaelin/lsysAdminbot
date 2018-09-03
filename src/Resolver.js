@@ -1,4 +1,4 @@
-const {MTProto} = require('telegram-mtproto');
+const {MTProto,} = require('telegram-mtproto');
 
 /*
  * This module uses the telegram mtproto api to resolve usernames into userIDs.
@@ -31,11 +31,11 @@ module.exports = class Resolver {
   }
   async resolve(username) {
     await this.loggedin;
-    return await this.mtproto('contacts.resolveUsername', {username}).then((peer)=>{
+    return await this.mtproto('contacts.resolveUsername', {username,}).then((peer)=>{
       let user = peer.users[0];
-      if (user.username == username) return user;
+      if (user.username === username) return user;
       return;
-    }).catch(()=>undefined);
+    }).catch(()=>undefined); // eslint-disable-line no-undefined
   }
   async req(ctx, next) {
     if (ctx.update && ctx.update.message && ctx.update.message.entities) {

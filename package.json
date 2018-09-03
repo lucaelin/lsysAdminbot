@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "eslint": "^5.5.0",
     "lowdb": "^1.0.0",
     "remove": "^0.1.5",
     "telegraf": "^3.21.1",
@@ -13,8 +14,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/index.js",
+    "test": "eslint ./src/**"
   },
   "author": "",
   "license": "MIT"

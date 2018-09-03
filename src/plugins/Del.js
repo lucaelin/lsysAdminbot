@@ -3,9 +3,10 @@ const DEL_REQUIRE = 3;
 const Vote = require('./Vote.js');
 
 module.exports = class Del {
-  constructor(bot) {
+  constructor(bot, db) {
     this.bot = bot;
     this.tg = bot.telegram;
+    this.db = db;
     this.bot.command('delete', (ctx)=>this.req(ctx));
     this.bot.helpQueue(this.help, this.settings);
 
@@ -31,9 +32,9 @@ module.exports = class Del {
       });
     } else {
       let rem = DEL_REQUIRE-res.sum;
-      msg += `I am currently missing another ${rem} confirmation${rem!=1?'s':''}.`;
+      msg += `I am currently missing another ${rem} confirmation${rem!==1?'s':''}.`;
     }
-    return {done, msg};
+    return {done, msg,};
   }
   async req(ctx) {
     console.log('del request', ctx, ctx.update.message);
@@ -47,7 +48,7 @@ module.exports = class Del {
       this.bot,
       msg.chat.id,
       txt,
-      ['Confirm'],
+      ['Confirm',],
       (...args)=>this.processVotes(...args),
       msg
     );

@@ -1,5 +1,5 @@
-const config = require('../config.json');
-const {exec} = require('child_process');
+const config = require('../../config.json');
+const {exec,} = require('child_process');
 
 module.exports = class AI {
   constructor(bot) {

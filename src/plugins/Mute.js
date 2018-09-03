@@ -30,7 +30,7 @@ module.exports = class Mute {
 
     if (res.sum >= MUTE_REQUIRE) {
       done = true;
-      let extras = {until_date: Math.round(new Date()/1000 + MUTE_TIMEOUT*60), can_send_messages: false};
+      let extras = {until_date: Math.round(new Date()/1000 + MUTE_TIMEOUT*60), can_send_messages: false,};
       await this.tg.restrictChatMember(chat.id, user.id, extras).then(()=>{
         msg += `I've muted the user in question.`;
       }).catch((e)=>{
@@ -40,7 +40,7 @@ module.exports = class Mute {
     } else {
       msg += `I am currently missing another ${MUTE_REQUIRE - res.sum} confirmations.`;
     }
-    return {done, msg};
+    return {done, msg,};
   }
 
   async req(ctx) {
@@ -56,7 +56,7 @@ module.exports = class Mute {
       this.bot,
       msg.chat.id,
       txt,
-      ['Confirm'],
+      ['Confirm',],
       (...args)=>this.processVotes(...args),
       msg.chat,
       user

@@ -11,7 +11,7 @@ class KickVote extends Vote {
       bot,
       chat.id,
       `Should I kick [${user.first_name}](tg://user?id=${user.id})?`,
-      ['Yes', 'No'],
+      ['Yes', 'No',],
       (...a)=>this.processVotes(...a),
     );
     this.chat = chat;
@@ -22,14 +22,14 @@ class KickVote extends Vote {
 
   async processVotes(res) {
     let done = false;
-    let msg = `This vote expires in ~${Math.round((this.expiredAt-(new Date()))/1000/60)} minutes.`;
+    let msg = `This vote expires in ~${Math.round((this.expiredAt-new Date())/1000/60)} minutes.`;
     msg += `\n${Math.round(res.results['Yes']*100/res.sum)}% voted in favour of this (${KICK_REQUIRE*100}% required).`;
 
     if (this.expiredAt < new Date()) {
       this.done = true;
       msg = 'This vote has expired.\n';
       if (res.results['Yes']/res.sum > KICK_REQUIRE) {
-        let extras = {until_date: Math.round(new Date()/1000 + KICK_TIMEOUT*60)};
+        let extras = {until_date: Math.round(new Date()/1000 + KICK_TIMEOUT*60),};
         await this.tg.kickChatMember(this.chat.id, this.user.id, extras).then(()=>{
           msg += `I've kicked the user in question.`;
         }).catch((e)=>{
@@ -40,7 +40,7 @@ class KickVote extends Vote {
         msg += `I didn't kick the user.`;
       }
     }
-    return {done, msg};
+    return {done, msg,};
   }
 }
 

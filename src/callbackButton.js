@@ -13,6 +13,6 @@ module.exports = (bot) => {
       bot.action(id, data);
       data = id;
     }
-    return {text, callback_data: data, hide};
+    return {text, callback_data: data, hide,};
   };
 };

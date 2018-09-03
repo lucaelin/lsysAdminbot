@@ -52,16 +52,16 @@ module.exports = class Vote {
       res[v]++;
     }
 
-    let {done, msg} = await this.cb({sum, results: res, votes: this.votes}, ...this.cbargs);
+    let {done, msg,} = await this.cb({sum, results: res, votes: this.votes,}, ...this.cbargs);
     this.done = done;
 
     let resTxt = '';
     if (this.anonymized) {
-      resTxt = Object.keys(res).map((k)=>`${res[k]} vote${res[k]!=1?'s':''} ${res[k]!=1?'say':'says'} '${k}'`).join('\n');
+      resTxt = Object.keys(res).map((k)=>`${res[k]} vote${res[k]!==1?'s':''} ${res[k]!==1?'say':'says'} '${k}'`).join('\n');
     } else {
       resTxt = Object.keys(this.votes).map((k)=>`[${k}](tg://user?id=${k}) said '${this.votes[k]}'`).join('\n');
     }
-    let txt = `There ${sum!=1?'have':'has'} been ${sum} vote${sum!=1?'s':''} so far${sum!=0?':':'.'}\n`;
+    let txt = `There ${sum!==1?'have':'has'} been ${sum} vote${sum!==1?'s':''} so far${sum!==0?':':'.'}\n`;
     txt += resTxt;
     txt += msg?'\n'+msg:'';
     let extras = TGExtra.markdown();
@@ -72,7 +72,7 @@ module.exports = class Vote {
       null,
       txt,
       extras
-    ).catch((e)=>{});
-    return {sum, results: res, votes: this.votes};
+    ).catch((e) => console.error(e));
+    return {sum, results: res, votes: this.votes,};
   }
 };
