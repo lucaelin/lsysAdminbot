@@ -29,11 +29,12 @@ module.exports = class Vote {
 
     this.votemsg = await this.tg.sendMessage(this.chatId, `I am putting this to a vote! ${this.question}`, kbd);
     this.resultmsg = await this.tg.sendMessage(this.chatId, 'There have been no votes, yet.');
-    await this.dutyCicle();
+    await this.dutyCycle();
   }
-  async dutyCicle() {
+  async dutyCycle() {
+    if (this.done) return;
     await this.evaluate();
-    if (!this.done) setTimeout(()=>this.dutyCicle(), 60*1000);
+    if (!this.done) setTimeout(()=>this.dutyCycle(), 60*1000);
   }
 
   async addVote(value, id) {
